@@ -587,6 +587,17 @@ namespace FluentNHibernate.Testing.AutoMap.Apm
                 .HasAttribute("table", "test-table");
         }
 
+        [Test]
+		public void TestEnumWithAutoMapper()
+		{
+            var autoMapper = AutoPersistenceModel
+                .MapEntitiesFromAssemblyOf<ExampleCustomColumn>()
+                .Where(t => t.Namespace == "FluentNHibernate.AutoMap.TestFixtures");
+
+			new AutoMappingTester<ExampleClass>(autoMapper)
+				.Element("//property[@name='Enum']").Exists();
+    	}
+
         private class JoinedSubclassConvention : IJoinedSubclassConvention
         {
             public bool Accept(IJoinedSubclass target)

@@ -36,7 +36,8 @@ namespace FluentNHibernate.AutoMap
         private static bool IsMappableToColumnType(PropertyInfo property)
         {
             return property.PropertyType.Namespace == "System"
-                   || property.PropertyType.FullName == "System.Drawing.Bitmap";
+                   || property.PropertyType.FullName == "System.Drawing.Bitmap"
+                   || property.PropertyType.IsEnum;
         }
 
         public void Map<T>(AutoMap<T> classMap, PropertyInfo property)
